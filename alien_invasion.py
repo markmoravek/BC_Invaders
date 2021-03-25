@@ -2,6 +2,7 @@ import sys
 from time import sleep
 
 import pygame
+import json
 
 from settings import Settings
 from game_stats import GameStats
@@ -102,6 +103,10 @@ class AlienInvasion:
 		elif event.key == pygame.K_LEFT:
 			self.ship.moving_left = True
 		elif event.key == pygame.K_q:
+			# Write high score to file when exiting
+			filename = 'highscore.json'
+			with open(filename, 'w') as f:
+				json.dump(self.stats.high_score,f)
 			sys.exit()
 		elif event.key == pygame.K_SPACE:
 			self._fire_bullet()
